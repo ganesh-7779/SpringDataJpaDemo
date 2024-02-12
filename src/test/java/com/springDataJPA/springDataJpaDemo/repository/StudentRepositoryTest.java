@@ -40,13 +40,13 @@ public class StudentRepositoryTest {
 	/**
 	 * Written test case to check embedded and embeddable in JPA and save the data
 	 */
-	Guardian guardian = Guardian.builder().email("ganeshb8@gmail.com").mobile("78474847").name("Pratik").build();
+	Guardian guardian = Guardian.builder().email("ganseb8@gmail.com").mobile("78474847").name("Pratik").build();
 	
 	@Test
 	public void saveStudentWithGuardian() {
-		Student student = Student.builder().name("Ganesh")
-				.emailId("Ganesh4@gmail.com")
-				.lasname("Gavhad")
+		Student student = Student.builder().name("Pratik")
+				.emailId("Ganesh4s@gmail.com")
+				.lasname("pawar")
 				.guardin(guardian).build();
 		studentRepository.save(student);
 
@@ -62,6 +62,62 @@ public class StudentRepositoryTest {
 		System.out.println("StudentLisr: "+student);
 		
 	}
+	
+	/** 
+	 *
+	 *  Test case to find all student by name present in tbl_student table
+	 */
+	@Test
+	public void findByName() {
+		List<Student> student = studentRepository.findByName("Pratik");
+		System.out.println("StudentListByName: "+student);
+		
+	}
+	
+	/** 
+	 *
+	 *  Test case to find all student by name contain present in tbl_student table
+	 */
+	@Test
+	public void findByNameContaining() {
+		List<Student> student = studentRepository.findByNameContaining("Pr");
+		System.out.println("StudentListByNameContaining: "+student);
+		
+	}
+	
+	/** 
+	 *
+	 *  Test case to find all student by Last Name present in tbl_student table
+	 */
+	@Test
+	public void findByNameLastName() {
+		List<Student> student = studentRepository.findByLasname("Gavhad");
+		System.out.println("StudentListByLastName: "+student);
+		
+	}
+	
+	/** 
+	 *
+	 *  Test case to find all student by Guardian Name present in tbl_student table
+	 */
+	@Test
+	public void findByNameGuardianName() {
+		List<Student> student = studentRepository.findByGuardinName("Pankaj");
+		System.out.println("StudentListByLastName: "+student);
+		
+	}
+	
+	/** 
+	 *
+	 *  Test case to find all student by Name and lastName present in tbl_student table
+	 */
+	@Test
+	public void findByNameAndLastName() {
+		List<Student> student = studentRepository.findByLasnameAndName("pawar","Pratik");
+		System.out.println("StudentListByLastName: "+student);
+		
+	}
+	
 	
 	
 	
