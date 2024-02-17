@@ -83,7 +83,7 @@ public class StudentRepositoryTest {
 	
 	/** 
 	 *
-	 *  Test case to find all student by name contain present in tbl_student table
+	 *  Test case to find student by emailId in tbl_student table
 	 */
 	@Test
 	@Order(5)
@@ -126,6 +126,45 @@ public class StudentRepositoryTest {
 	public void findByNameAndLastName() {
 		List<Student> student = studentRepository.findByLasnameAndName("pawar","Pratik");
 		System.out.println("StudentListByLastName: "+student);
+		
+	}
+	
+	/** 
+	 *
+	 *  Test case to find all student by Name and lastName present in tbl_student table
+	 */
+	@Test
+	@Order(9)
+	public void findByEmailAddress() {
+		Student student = studentRepository.getStudentByEmailAddress("Ganeshs@gmail.com");
+		System.out.println("StudentByEamilId: "+student);
+		
+	}
+	
+	/** 
+	 *
+	 *  Test case to find student Name by emailiD present in tbl_student table
+	 */
+	@Test
+	@Order(10)
+	public void findFirstNameByEmailAddress() {
+		String student = studentRepository.getStudentFirstNameByEmailAddress("Ganeshs@gmail.com");
+		System.out.println("StudentFirstNameByEamilId: "+student);
+		
+	}
+	
+	@Test
+	@Order(11)
+	public void findByEmailAddressNative() {
+		Student student = studentRepository.getStudentByEmailAddressNative("Ganeshs@gmail.com");
+		System.out.println("StudentByEamilIdNative: "+student);
+		
+	}
+	@Test
+	@Order(12)
+	public void findByEmailAddressNativeNamedParam() {
+		Student student = studentRepository.getStudentByEmailAddressNativeNamedParam("Ganeshs@gmail.com");
+		System.out.println("StudentByEamilIdNativeNamedParam: "+student);
 		
 	}
 }
