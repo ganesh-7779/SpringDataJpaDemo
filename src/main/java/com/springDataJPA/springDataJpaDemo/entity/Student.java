@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 public class Student {
 	
 	private String name;
-	private String lasname;
+	private String lastname;
 	@Id   // Will define this field as primary key of this table 
 	@SequenceGenerator(name = "student_sequence", sequenceName="student_sequence", allocationSize=1)
 	@GeneratedValue(strategy= GenerationType.SEQUENCE, generator="student_sequence" )

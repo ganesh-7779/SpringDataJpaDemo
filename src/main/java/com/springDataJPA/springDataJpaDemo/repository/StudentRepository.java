@@ -3,11 +3,13 @@ package com.springDataJPA.springDataJpaDemo.repository;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.springDataJPA.springDataJpaDemo.entity.Student;
+import org.springframework.transaction.annotation.Transactional;
 
 
 /**
@@ -16,13 +18,14 @@ import com.springDataJPA.springDataJpaDemo.entity.Student;
  * Query will be created base on attribute present in the table
  */
 
+
 @Repository
 public interface StudentRepository extends JpaRepository<Student,Long> {	
 	public List<Student> findByName(String firstName);
 	public List<Student> findByNameContaining(String firstName);
-	public List<Student> findByLasname(String lastName);
+	public List<Student> findByLastname(String lastName);
 	public List<Student> findByGuardinName(String guardianName);
-	public List<Student> findByLasnameAndName(String lastName, String name);
+	public List<Student> findByLastnameAndName(String lastName, String name);
 	
 	/**
 	 * @Queary Annotation is used to define native SQL queries or HQL (Hibernate Query Language) queries directly on the repository method. 
@@ -46,6 +49,16 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
 	@Query(value="select * from tbl_student where email_address= :emailId", nativeQuery= true)
 	Student getStudentByEmailAddressNativeNamedParam(@Param("emailId")String emailId);
 	
-
+	/**
+	 * @Transactional Annotation is used for Transaction Management It starts the transaction before the annotated method begins executing and commits the transaction after the method completes successfully.
+	 *  If an exception occurs during method execution, Spring rolls back the transaction to maintain data integrity.
+	 * @Modifying: This annotation is typically used in Spring Data JPA repositories to indicate that a method modifies the database state. It works in conjunction with query methods such as
+	 * @Query to specify JPQL (Java Persistence Query Language) or native SQL queries for update or delete operations. 
+	 */
+	@Transactional
+	@Modifying
+	@Query(value = " update tbl_student set name = ?1 where email_address = ?2", nativeQuery =true)
+	int updateStudentFirstNameByEmailId(String name, String emailID);
+	
 
 }

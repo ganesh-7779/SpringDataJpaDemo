@@ -31,7 +31,7 @@ public class StudentRepositoryTest {
 		String emailId = RandomStringUtils.randomAlphanumeric(10) + "@gmail.com"; // Change length as needed
 		Student student =  Student.builder().emailId(emailId)
                 .name("Ganesh")
-                .lasname("Gavhad")
+                .lastname("Gavhad")
                 //.guardianName("Pankaj")
                 //.guardianEmail("pankaj@gmail.com")
                 //.guardianMobile("9999999999")
@@ -51,7 +51,7 @@ public class StudentRepositoryTest {
 
 		Student student = Student.builder().name("Pratik")
 				.emailId(emailId)
-				.lasname("pawar")
+				.lastname("pawar")
 				.guardin(guardian).build();
 		studentRepository.save(student);
 
@@ -100,7 +100,7 @@ public class StudentRepositoryTest {
 	@Test
 	@Order(6)
 	public void findByNameLastName() {
-		List<Student> student = studentRepository.findByLasname("Gavhad");
+		List<Student> student = studentRepository.findByLastname("Gavhad");
 		System.out.println("StudentListByLastName: "+student);
 		
 	}
@@ -124,7 +124,7 @@ public class StudentRepositoryTest {
 	@Test
 	@Order(8)
 	public void findByNameAndLastName() {
-		List<Student> student = studentRepository.findByLasnameAndName("pawar","Pratik");
+		List<Student> student = studentRepository.findByLastnameAndName("pawar","Pratik");
 		System.out.println("StudentListByLastName: "+student);
 		
 	}
@@ -165,6 +165,14 @@ public class StudentRepositoryTest {
 	public void findByEmailAddressNativeNamedParam() {
 		Student student = studentRepository.getStudentByEmailAddressNativeNamedParam("Ganeshs@gmail.com");
 		System.out.println("StudentByEamilIdNativeNamedParam: "+student);
+		
+	}
+	
+	@Test
+	@Order(13)
+	public void updateStudentFirstNameByEmailId() {
+		int student = studentRepository.updateStudentFirstNameByEmailId("Rohan","Ganeshs@gmail.com");
+		System.out.println("updateStudentFirstNameByEmailId: "+student);
 		
 	}
 }
